@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from sqlalchemy.exc import SQLAlchemyError
 from app.db.session import engine
+from app.api import routes
 
 app = FastAPI()
 
@@ -11,3 +12,5 @@ def startup_event():
             print("✅ DB connected successfully!")
     except SQLAlchemyError as e:
         print("❌ DB connection failed:", e)
+
+app.include_router(routes.router)

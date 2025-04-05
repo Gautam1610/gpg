@@ -14,11 +14,9 @@ engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
-# run_test_connection.py
-from app.db.session import engine
-
-try:
-    with engine.connect() as conn:
-        print("✅ PostgreSQL connected successfully!")
-except Exception as e:
-    print("❌ Error connecting to PostgreSQL:", e)
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
