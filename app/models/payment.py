@@ -8,9 +8,8 @@ if TYPE_CHECKING:
 class Payment(Base):
     __tablename__ = "payments"
 
-    id: Mapped[int] = mapped_column(primary_key=True, index=True)
-    customer_id: Mapped[int] = mapped_column(ForeignKey("customers.id"))
+    id: Mapped[str] = mapped_column(String, primary_key=True, index=True)
+    customer_id: Mapped[str] = mapped_column(ForeignKey("customers.id"))
     currency: Mapped[str] = mapped_column(String(10))
     amount: Mapped[float] = mapped_column(Float)
-
     customer: Mapped["Customer"] = relationship(back_populates="payments")
