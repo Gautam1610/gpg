@@ -2,7 +2,7 @@ from sqlalchemy import Column, String, Float, Integer, ForeignKey
 from sqlalchemy.orm import relationship, Mapped, mapped_column
 from app.db.base import Base
 from enum import Enum
-from typing import List
+from typing import List , Optional
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -16,3 +16,5 @@ class Merchant(Base):
     registered_customer: Mapped[List["Customer"]] = relationship(
         back_populates="merchant" , cascade="all, delete-orphan"
         )
+    hashed_password: Mapped[str] = mapped_column(String(100))
+    hashed_key : Mapped[Optional[str]] = mapped_column(String(100))
